@@ -1,0 +1,12 @@
+
+services:
+  - type: web
+    name: news-project
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn news.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: news.settings
+      - key: PYTHON_VERSION
+        value: 3.11.8
