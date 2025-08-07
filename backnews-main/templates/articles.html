@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>جميع المقالات - الدار العراقية</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      background-color: #F8E2A7;
+      direction: rtl;
+    }
+    .card {
+      margin-bottom: 20px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+    }
+    .card-title {
+      color: #4a3d00;
+    }
+    .card-text {
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+<header style="background: #f4d27a;">
+  <div class="d-flex justify-content-center align-items-center">
+    <img src="{% static 'bj3TXvrEWpUXOvqbNcrOZnf23DTfqTPY.jpg' %}" class="img-fluid" style="height: 260px; width: auto;" alt="logo">
+    <img src="{% static 'fkzvlOKRhNa9PsumicijJHWj3LPJnhoA.jpg' %}" class="img-fluid" style="height: 260px; width: auto;" alt="banner">
+  </div>
+</header>
+<div class="container py-4">
+  <h2 class="text-center mb-4">جميع المقالات</h2>
+
+  <div class="row">
+    {% for art in arts %}
+      <div class="col-md-4">
+        <div class="card">
+          {% if art.image %}
+            <img src="{{ art.image.url }}" class="card-img-top" alt="{{ art.title }}">
+          {% else %}
+            <img src="{% static 'img1.jpg' %}" class="card-img-top" alt="صورة افتراضية">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ art.title }}</h5>
+            <p class="card-text">منذ {{ art.created_at|timesince }}</p>
+            <a href="{% url 'details' art.id %}" class="btn btn-sm btn-outline-dark">قراءة المزيد</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-center">لا توجد مقالات حالياً.</p>
+    {% endfor %}
+  </div>
+</div>
+
+</body>
+</html>

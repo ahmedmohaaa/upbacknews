@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ news.title }} | الدار العراقية</title>
+  <link rel="stylesheet" href="{% static 'styles.css' %}">  {# إذا كنت تستخدم ملف CSS خارجي #}
+  <style>
+    body {
+      margin: 0;
+      font-family: Tahoma, sans-serif;
+      background: #F8E2A7;
+    }
+
+     header {
+      background: #f4d27a;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo {
+      height: 260px;
+      width: auto;
+    }
+
+    .banner {
+      height: 260px;
+      width: auto;
+    }
+
+
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      background: #F8E2A7;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 40px 0px 12px rgba(0,0,0,0.1);
+    }
+
+    .news-title {
+      font-size: 24px;
+      color: #b06b00;
+      margin-bottom: 10px;
+    }
+
+    .news-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .news-content {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #333;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #f4d27a;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <img src="{% static 'bj3TXvrEWpUXOvqbNcrOZnf23DTfqTPY.jpg'%}" class="logo" alt="logo">
+    <img src="{% static 'fkzvlOKRhNa9PsumicijJHWj3LPJnhoA.jpg'%}" class="banner" alt="banner">
+  </div>
+</header>
+
+<div class="container">
+  <h1 class="news-title">{{ news.title }}</h1>
+
+  {% if news.image %}
+    <img src="{{ news.image.url }}" alt="{{ news.title }}" class="news-image">
+  {% endif %}
+
+  <div class="news-content">
+{{ news.description|safe }}
+  </div>
+
+  <a href="{% url 'index' %}" class="back-button">العودة إلى الرئيسية</a>
+</div>
+
+</body>
+</html>

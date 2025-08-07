@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة / تعديل خبر</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            background-color: #ffc107;
+            color: #333;
+            padding: 20px 0;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 900px;
+            direction: rtl;
+            text-align: right;
+        }
+        button {
+            background-color: #ffc107;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #e6e6e6;
+            border-radius: 4px;
+        }
+        .actions {
+            display: inline-block;
+            margin-right: 10px;
+        }
+       .actions a{
+     background-color: #ffc107;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            cursor: pointer;
+        text-decoration: none;
+        }
+        li{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><a href="{% url 'change_password' %}">تغيير كلمة المرور</a>
+/إضافة / تعديل خبر</h1>
+    </div>
+
+    <div class="container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <button type="submit">
+                {% if form.instance.pk %} تحديث {% else %} إضافة {% endif %}
+            </button>
+        </form>
+
+        <hr>
+
+        <h2>كل الأخبار</h2>
+        <ul>
+            {% for news in all_news %}
+                <li>
+                    {{ news.title }}
+ <div class="all">
+                    <div class="actions">
+                        <a href="{% url 'crud_with_id' news.id %}">تحديث</a>
+                    </div>
+                    <div class="actions">
+                        <form method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="delete_id" value="{{ news.id }}">
+                            <button type="submit">حذف</button>
+                        </form>
+                    </div></div>
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+

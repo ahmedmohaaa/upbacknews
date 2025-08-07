@@ -1,0 +1,556 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>الدار العراقية</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Tahoma, sans-serif;
+      background: #F8E2A7;
+    }
+
+    header {
+      background: #f4d27a;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo {
+      height: 260px;
+      width: auto;
+    }
+
+    .banner {
+      height: 260px;
+      width: auto;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px;
+      gap: 20px;
+    }
+
+    .column {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .left-column, .right-column {
+      flex: 1;
+    }
+
+    .main-column {
+      flex: 2;
+    }
+
+    .highlight-news {
+      background-color: #fffec1;
+      padding: 5px;
+            border: #333 1px solid;
+
+    }
+
+    .highlight-news img {
+      width: 100%;
+      border-radius: 5px;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .highlight-news h3 {
+      color: red;
+    }
+
+    .highlight-news a {
+      display: inline-block;
+      background: #ffc;
+      padding: 5px 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #333;
+      border: #333 solid 1px;
+    }
+
+    .card {
+      background: #eeeeee;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 8px;
+      text-align: center;
+      border: #333 1px solid;
+    }
+
+    .card img {
+      width: 40px;
+    }
+
+    .news-list li {
+      list-style: none;
+      margin: 10px 0;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+
+    .news-list li a {
+      text-decoration: none;
+      color: black;
+    }
+
+    .news-list li:hover {
+      background-color: #ffedc1;
+    }
+
+    .info-box, .info {
+      background: #fff;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      box-shadow: black 2px 2px 12px;
+    }
+
+    .info h3 {
+      color: #f4d27a;
+    }
+
+    .rightbar {
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .show-more-btn {
+      display: block;
+      text-align: center;
+      margin: 10px auto;
+      padding: 5px 10px;
+      background-color: #f4d27a;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.news-list li{
+  background-color: #F8E2A7;
+}
+.news-item {
+  display: block;
+  align-items: center;
+  background: #fff;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px #333  solid;
+
+}
+
+.news-item img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+.news-content {
+  padding: 10px;
+  flex-grow: 1;
+}
+
+.news-content h3 {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+}
+
+.news-content .time {
+  color: gray;
+  font-size: 14px;
+}
+.news-ticker {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 5px 0;
+  margin: 10px 0;
+  direction: rtl; /* لتأكد اتجاه النص */
+  position: relative;
+  user-select: none;
+  cursor: default;
+  background-color: #F8E2A7;
+}
+
+.news-items {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollNews 20s linear infinite;
+  background-color: #F8E2A7;
+}
+.news-items a{
+    text-decoration: none;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main-column .news-list p{font-size: smaller;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.news-title {
+  display: inline-block;
+  padding: 0 20px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  color: black;
+  font-weight: bold;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.news-title:hover {
+  color: red;
+  border-color: red;
+  animation-play-state: paused; /* لتثبيت التحريك عند المرور */
+  cursor: pointer;
+}
+
+/* تحريك الأخبار من اليسار إلى اليمين */
+@keyframes scrollNews {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* اجعل خلفية الحاويات شفافة أو نفس لون الـ body */
+.container {
+  background: transparent; /* أو background: #F8E2A7; */
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  gap: 20px;
+}
+
+/* اجعل الأعمدة شفافة أو نفس لون الخلفية */
+.column {
+  background: transparent; /* بدلاً من white */
+  padding: 15px;
+  border-radius: 8px;
+  /* لو حابب تضيف ظل خفيف بدل الخلفية البيضاء: */
+  box-shadow: 12px 12px 10px rgba(0,0,0,0.05);
+  border: #333 1px solid;
+}
+
+/* نفس الشيء للعنصر rightbar */
+.rightbar {
+  background: transparent; /* أو #F8E2A7 */
+  padding: 15px;
+  border-radius: 8px;
+  border: #333 1px solid;
+}
+
+/* للعناصر اللي لونها أبيض مثل .highlight-news */
+.highlight-news {
+  background-color: transparent; /* بدل #fffec1 لو حابب توحد */
+  padding: 5px;
+}
+
+/* لو حابب تترك الـ highlight-news بلون فاتح ممكن تبقيه لون قريب من الخلفية */
+.highlight-news {
+  background-color: #f9f2bb; /* أو أي لون فاتح متناسق مع #F8E2A7 */
+}
+
+/* للعناصر اللي لونها أبيض (info, info-box) */
+.info, .info-box {
+  background: transparent; /* بدل #fff */
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: black 2px 2px 12px;
+  border: #333 1px solid;
+}
+
+/* لو النص صار يصعب قراءته، خليه داكن */
+.info h3, .highlight-news h3 {
+  color: #4a3d00; /* لون داكن مناسب */
+}
+
+/* لو في أزرار أو غيرها تحتاج خلفية */
+.show-more-btn {
+  background-color: #f4d27a; /* ممكن تتركها كما هي أو تغير */
+  color: #4a3d00;
+}
+
+/* ضع نصوص الأخبار بلون مناسب */
+.news-list li a, .news-title {
+  color: #3e2f00;
+}
+.news-list li{
+    border: #333 1px solid;
+    padding: 2px;
+    border-radius: 4px;
+
+}
+/* مثال على تغيير لون النص */
+body, p, a, span {
+  color: #3e2f00; /* لون بني داكن */
+}
+
+.footer{
+  text-align: center;
+}
+.rightbar .info p{
+  font-weight: 900;
+}
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .logo,
+      .banner {
+        height: 150px;
+      }
+
+      .news-list li {
+        font-size: 14px;
+      }
+
+      .highlight-news h3 {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="navbar">
+    <img src="{% static 'bj3TXvrEWpUXOvqbNcrOZnf23DTfqTPY.jpg'%}" class="logo" alt="logo">
+    <img src="{% static 'fkzvlOKRhNa9PsumicijJHWj3LPJnhoA.jpg'%}" class="banner" alt="banner">
+  </div>
+</header>
+<div class="news-ticker" id="newsTicker">
+  <div class="news-items">
+  {% for news in allnews %}
+  <a href="{% url 'details' news.id %}" class="news-title">{{ news.title }}</a>
+{% endfor %}
+
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Right Column (أخبار رياضية) -->
+  <div class="right-column rightbar">
+    <div class="info">
+      <p>اخبارية مستقلة معتمده
+تأسست الشهر السابع من عام 2003</p>
+<p> - رئيس التحرير كريم الزيادي<br>
+- مدير التحرير وسام سعد</p>
+    </div>
+  
+<ul class="news-list" id="sportsNews">
+  <h4>رياضه</h4>
+  {% for new in news %}
+  <li class="news-item" {% if forloop.counter > 5 %}style="display: none;"{% endif %}>
+    {% if new.image and new.image.url %}
+      <img src="{{ new.image.url }}" alt="{{ new.title }}">
+    {% else %}
+      <img src="{% static 'img1.jpg' %}" alt="صورة افتراضية">
+    {% endif %}
+
+    <div class="news-content">
+      <a href="#" onclick="showNews('{{new.title}}', '{{ new.image.url }}', '{% url 'details' new.id %}')">
+        {% if new.category == "رياضى" %}
+          {{ new.id }} - {{ new.title }}
+        {% else %}
+          {{ new.title }}
+        {% endif %}
+      </a>
+      <br>  
+      <span class="time">منذ {{ new.created_at|timesince }}</span>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+
+{% if news|length > 5 %}
+  <a href="{% url 'sports'%}" class="show-more-btn" onclick="showMore('sportsNews', this)">عرض المزيد</a>
+{% endif %}
+ </div>
+
+  <!-- Main Column -->
+<div class="main-column column">
+  <ul class="news-list">
+    {% for news in allnews %}
+      <li>
+<a href="#" onclick="showNews('{{ news.title|escapejs }}', '{% if news.image %}{{ news.image.url|escapejs }}{% else %}{% static "img1.jpg" %}{% endif %}', '{% url 'details' news.id %}')">
+          {{ news.id }} - {{ news.title }}
+        </a>
+        <p>منذ {{ news.created_at|timesince }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <!-- ترقيم الصفحات -->
+  <div class="pagination">
+    <span class="step-links">
+        {% if allnews.has_previous %}
+            <a href="?page=1">الأولى</a>
+            <a href="?page={{ allnews.previous_page_number }}">السابق</a>
+        {% endif %}
+
+        <span class="current">
+            صفحة {{ allnews.number }} من {{ allnews.paginator.num_pages }}
+        </span>
+
+        {% if allnews.has_next %}
+            <a href="?page={{ allnews.next_page_number }}">التالي</a>
+            <a href="?page={{ allnews.paginator.num_pages }}">الأخيرة</a>
+        {% endif %}
+    </span>
+  </div>
+</div>
+
+
+  <!-- Left Column (مقالات) -->
+  <div class="left-column column">
+  
+{% if lnews %}
+  <div class="highlight-news">
+{% if lnews.image %}
+  <img src="{{ lnews.image.url }}" alt="news-image" />
+{% else %}
+<h4>لا يوجد صور</h4>{% endif %}
+    <a href="{% url 'details' lnews.id %}" id="aaa">
+      <h3>{{ lnews.title }}</h3>
+    </a>
+  </div>
+{% endif %}
+
+
+   
+
+    <ul class="news-list" id="articlesList">
+    <h4>مقالات</h4>
+    {% for art in arts%}
+  <li class="news-item" {% if forloop.counter > 5 %}style="display: none;"{% endif %}>
+{% if art.image %}
+  <img src="{{ art.image.url }}" alt="{{ art.title }}">
+{% else %}
+  <img src="img1.jpg" alt="صورة افتراضية">  {# صورة افتراضية مثلاً #}
+{% endif %}
+    <div class="news-content">
+<a href="#" onclick="showNews('{{art.title|escapejs}}', '{% if art.image %}{{ art.image.url|escapejs }}{% else %}{% static "img1.jpg" %}{% endif %}', '{% url 'details' art.id %}')">
+         {% if art.category == "مقالى" %}
+        {{ art.id }} - {{ art.title }}
+      {% else %}
+        {{ art.title }}
+      {% endif %} </a></a>
+    <br>  <span class="time">منذ {{ art.created_at|timesince }}</span>
+
+    </div>
+  </li>
+  {% endfor %}
+ 
+</ul>
+{% if arts|length > 5 %}
+  <a href="{% url 'articles' %}" class="show-more-btn" onclick="showMore('articlesList', this)">عرض المزيد</a>
+{% endif %}
+
+    <!-- ضع هذا الزر بعد زر "عرض المزيد" -->
+
+  </div>
+
+</div><div class="footer">
+  <p>© جميع الحقوق محفوظة للدار العراقية 2025</p>
+</div>
+
+<script>
+
+const newsItems = document.querySelector('.news-items');
+
+document.getElementById('newsTicker').addEventListener('mouseenter', () => {
+  newsItems.style.animationPlayState = 'paused';
+});
+
+document.getElementById('newsTicker').addEventListener('mouseleave', () => {
+  newsItems.style.animationPlayState = 'running';
+});
+
+  function showNews(title, imageUrl,href) {
+    const image = document.querySelector('.highlight-news img');
+    const heading = document.querySelector('.highlight-news h3');
+    const aaa=document.getElementById('aaa')
+
+    image.src = imageUrl;
+    heading.textContent = title;
+    aaa.href=href
+  }
+function showMore(listId, button) {
+ 
+  hiddenItems.forEach(item => {
+    item.style.display = 'block';
+  });
+
+  // لا تقم بإخفاء الزر
+  // button.style.display = 'none';
+}
+document.addEventListener("DOMContentLoaded", function() {
+  const list = document.getElementById("articlesList");
+  const items = list.querySelectorAll(".news-item");
+
+  // أول 5 عناصر فقط تظهر، والباقي يُخفى
+  items.forEach((item, index) => {
+    if (index >= 5) {
+      item.style.display = "none";
+    } else {
+      item.style.display = "block";
+    }
+  });
+});
+</script>
+</body>
+</html>
