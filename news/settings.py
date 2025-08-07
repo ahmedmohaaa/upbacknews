@@ -90,15 +90,10 @@ WSGI_APPLICATION = 'news.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Djangodatabase',           # ← اسم قاعدة البيانات
-        'USER': 'postgres',         # ← اسم المستخدم
-        'PASSWORD': '123aa456aa', # ← كلمة المرور
-        'HOST': 'localhost',      # ← أو IP السيرفر
-        'PORT': '5432',           # ← البورت (افتراضي)
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 
 # Password validation
