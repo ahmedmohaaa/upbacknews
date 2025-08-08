@@ -15,7 +15,7 @@ class CustomPasswordChangeView(PasswordChangeView):
 
 
 def index(request):
-    all_news_list = News.objects.all().order_by('-created_at')
+    all_news_list = News.objects.all().order_by('-is_featured', '-created_at')
     
     # تحديد عدد الأخبار في كل صفحة
     paginator = Paginator(all_news_list, 15)  # 25 خبر في الصفحة
@@ -26,9 +26,10 @@ def index(request):
     # الحصول على الصفحة المطلوبة
     all_news = paginator.get_page(page_number)
 
-    news = News.objects.filter(category='رياضى').order_by('-created_at')
-    articales = News.objects.filter(category='مقالى').order_by('-created_at')
-    lnews = News.objects.order_by('-created_at').first() 
+    news = News.objects.filter(category='رياضى').order_by('-is_featured', '-created_at')
+    articales = News.objects.filter(category='مقالى').order_by('-is_featured', '-created_at')
+    lnews = News.objects.order_by('-is_featured', '-created_at').first()
+ 
     
     return render(request, 'index.html', {
         'news': news,
@@ -72,12 +73,12 @@ def crud(request, pk=None):
 
 
 def all_articles_view(request):
-    articles = News.objects.filter(category='مقالى').order_by('-created_at')
+    articles = News.objects.filter(category='مقالى').order_by('-is_featured', '-created_at')
     return render(request, 'articles.html', {'arts': articles})
 
 
 def sports_news_view(request):
-    news = News.objects.filter(category='رياضى').order_by('-created_at')
+    news = News.objects.filter(category='رياضى').order_by('-is_featured', '-created_at')
     return render(request, 'sports.html', {'sports': news})
 
 def login_view(request):
@@ -109,7 +110,7 @@ def update(request, pk=None):
             news.delete()
             return redirect('update')
 
-    all_news = News.objects.all().order_by('-created_at')
+    all_news = News.objects.all().order_by('-is_featured', '-created_at')
     return render(request, 'update.html', {
         'all_news': all_news,
     })

@@ -19,6 +19,8 @@ class News(models.Model):
         null=True,
         verbose_name="وصف الخبر"
     )
+    is_featured = models.BooleanField(default=False, verbose_name="خبر مميز")
+
     image = models.ImageField(
         upload_to='uploads/news/', 
         blank=True, 
