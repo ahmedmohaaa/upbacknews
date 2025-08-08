@@ -105,11 +105,7 @@
     {{ form.media }}
     {{ form.as_p }}
 
-    <label for="id_images">صور إضافية:</label>
- <div id="images-container">
-    <input type="file" name="images" style="width: 100%; padding:10px;" />
-</div>
-<a href="#" id="add-image-field" style="color: blue; text-decoration: underline; display: inline-block; margin-top: 10px;">+ إضافة صورة أخرى</a>
+
 <br>
 <div class="link">
     <button type="submit">
@@ -120,22 +116,7 @@
 
       
     </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('add-image-field').addEventListener('click', function (e) {
-            e.preventDefault();
 
-            // إنشاء عنصر input جديد
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.name = 'images';
-            input.style = 'width: 100%; padding:10px; margin-top: 10px;';
-
-            // إضافته للحاوية
-            document.getElementById('images-container').appendChild(input);
-        });
-    });
-</script>
 
 </body>
 </html>

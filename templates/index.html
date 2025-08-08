@@ -230,7 +230,10 @@
 
 
 
-
+.aaa{
+  text-decoration: none;
+  color: rgb(19, 17, 17);
+}
 
 
 
@@ -244,7 +247,7 @@
   border-radius: 10px;
   color: black;
   font-weight: bold;
-  transition: color 0.3s, border-color 0.3s;
+  transition: color 0.5s, border-color 0.6s;
 }
 
 .news-title:hover {
@@ -344,30 +347,43 @@ body, p, a, span {
 .rightbar .info p{
   font-weight: 900;
 }
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
 
-      .logo,
-      .banner {
-        height: 150px;
-      }
+  /* ترتيب الأعمدة */
+  .main-column {
+    order: 1;  /* يظهر أولاً */
+  }
 
-      .news-list li {
-        font-size: 14px;
-      }
+  .right-column {
+    order: 2;  /* يظهر ثانياً */
+  }
 
-      .highlight-news h3 {
-        font-size: 16px;
-      }
-    }
+  .left-column {
+    order: 3;  /* يظهر ثالثاً */
+  }
+
+  .logo,
+  .banner {
+    height: 150px;
+  }
+
+  .news-list li {
+    font-size: 14px;
+  }
+
+  .highlight-news h3 {
+    font-size: 16px;
+  }
+}
   </style>
 </head>
 <body>
 <header>
   <div class="navbar">
-    <img src="{% static 'bj3TXvrEWpUXOvqbNcrOZnf23DTfqTPY.jpg'%}" class="logo" alt="logo">
+  <a href="{% url 'index' %}">  <img src="{% static 'bj3TXvrEWpUXOvqbNcrOZnf23DTfqTPY.jpg'%}" class="logo" alt="logo"></a>
     <img src="{% static 'fkzvlOKRhNa9PsumicijJHWj3LPJnhoA.jpg'%}" class="banner" alt="banner">
   </div>
 </header>
@@ -402,7 +418,7 @@ body, p, a, span {
     {% endif %}
 
     <div class="news-content">
-      <a href="#" onclick="showNews('{{new.title}}', '{{ new.image.url }}', '{% url 'details' new.id %}')">
+      <a href="{% url 'details' new.id %}" >
         {% if new.category == "رياضى" %}
           {{ new.id }} - {{ new.title }}
         {% else %}
@@ -426,7 +442,7 @@ body, p, a, span {
   <ul class="news-list">
     {% for news in allnews %}
       <li>
-<a href="#" onclick="showNews('{{ news.title|escapejs }}', '{% if news.image %}{{ news.image.url|escapejs }}{% else %}{% static "img1.jpg" %}{% endif %}', '{% url 'details' news.id %}')">
+      <a href="{% url 'details' news.id %}" >
           {{ news.id }} - {{ news.title }}
         </a>
         <p>منذ {{ news.created_at|timesince }}</p>
@@ -456,19 +472,7 @@ body, p, a, span {
 
 
   <!-- Left Column (مقالات) -->
-  <div class="left-column column">
-  
-{% if lnews %}
-  <div class="highlight-news">
-{% if lnews.image %}
-  <img src="{{ lnews.image.url }}" alt="news-image" />
-{% else %}
-<h4>لا يوجد صور</h4>{% endif %}
-    <a href="{% url 'details' lnews.id %}" id="aaa">
-      <h3>{{ lnews.title }}</h3>
-    </a>
-  </div>
-{% endif %}
+
 
 
    
@@ -483,7 +487,7 @@ body, p, a, span {
   <img src="img1.jpg" alt="صورة افتراضية">  {# صورة افتراضية مثلاً #}
 {% endif %}
     <div class="news-content">
-<a href="#" onclick="showNews('{{art.title|escapejs}}', '{% if art.image %}{{ art.image.url|escapejs }}{% else %}{% static "img1.jpg" %}{% endif %}', '{% url 'details' art.id %}')">
+      <a href="{% url 'details' art.id %}" >
          {% if art.category == "مقالى" %}
         {{ art.id }} - {{ art.title }}
       {% else %}
@@ -505,7 +509,7 @@ body, p, a, span {
   </div>
 
 </div><div class="footer">
-  <p>© جميع الحقوق محفوظة للدار العراقية 2025</p>
+  <p>© جميع الحقوق محفوظة <a class="aaa" href="{% url 'index' %}">للدار العراقية</a>  2025</p>
 </div>
 
 <script>
@@ -520,15 +524,7 @@ document.getElementById('newsTicker').addEventListener('mouseleave', () => {
   newsItems.style.animationPlayState = 'running';
 });
 
-  function showNews(title, imageUrl,href) {
-    const image = document.querySelector('.highlight-news img');
-    const heading = document.querySelector('.highlight-news h3');
-    const aaa=document.getElementById('aaa')
 
-    image.src = imageUrl;
-    heading.textContent = title;
-    aaa.href=href
-  }
 function showMore(listId, button) {
  
   hiddenItems.forEach(item => {

@@ -105,11 +105,7 @@
   {% endif %}
 
   {% if news.images.all %}
-    <div class="additional-images">
-   {% for img in news.images.all %}
-      <img src="{{ img.image.url }}" alt="صورة إضافية" />
-    {% endfor %}
-    </div>
+  
   {% endif %}
 
   <div class="news-content">

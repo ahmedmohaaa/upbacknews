@@ -39,21 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cn',
-     'ckeditor',
          'widget_tweaks',
+              'django_summernote',
+
 
 ]
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'  # أو أي صفحة عندك بعد تسجيل الدخول
 
 
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'full',
-        'height': 300,
-        'width': '100%',
-    },
-}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -95,6 +90,40 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+ 
+LANGUAGE_CODE = 'ar'
+TIME_ZONE = 'Asia/Riyadh'
+
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+
+SUMMERNOTE_CONFIG = {
+    'iframe': True,  # فتح المحرر داخل iframe لعزل CSS
+    'lang': 'ar-AR',  # هنا تحدد اللغة للعربية
+    'attachment_require_authentication': True,  # أو True حسب حاجتك
+
+    'summernote': {
+        'width': '100%',
+        'height': '480',
+        'toolbar': [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video', 'hr']],  # إضافة رفع الصور والفيديو والروابط
+            ['view', ['fullscreen', 'codeview', 'help']],
+        ],
+        'callbacks': {
+            # ممكن تضيف دوال جافاسكريبت للتعامل مع رفع الملفات لو احتجت
+        },
+    },
+    'attachment_require_authentication': False,  # للسماح برفع الملفات بدون تسجيل دخول
+}
+
 
 
 # Password validation
@@ -119,9 +148,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
 
 USE_I18N = True
 

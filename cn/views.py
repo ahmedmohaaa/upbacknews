@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from .forms import NewsForm
-from .models import News,NewsImage
+from .models import News
 from django.core.paginator import Paginator
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
@@ -56,11 +56,7 @@ def crud(request, pk=None):
             if pk:
                 news.images.all().delete()
 
-            for img in images:
-                NewsImage.objects.create(news=news, image=img)
-
-            messages.success(request, "تم الحفظ بنجاح، يمكنك إضافة صور أخرى.")
-            return redirect('crud')
+       
     else:
         form = NewsForm(instance=instance)
 
