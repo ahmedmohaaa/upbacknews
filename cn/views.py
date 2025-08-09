@@ -18,7 +18,7 @@ def index(request):
     all_news_list = News.objects.all().order_by('-is_featured', '-created_at')
     
     # تحديد عدد الأخبار في كل صفحة
-    paginator = Paginator(all_news_list, 15)  # 25 خبر في الصفحة
+    paginator = Paginator(all_news_list, 25)  # 25 خبر في الصفحة
 
     # الحصول على رقم الصفحة المطلوبة من الرابط (GET parameter)
     page_number = request.GET.get('page')

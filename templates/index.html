@@ -24,12 +24,12 @@
     }
 
     .logo {
-      height: 280px;
+      height: 260px;
       width: auto;
     }
 
     .banner {
-      height: 280px;
+      height: 260px;
       width: auto;
     }
 
@@ -151,6 +151,7 @@
 }
 .news-list li{
   background-color: #F8E2A7;
+  
 }
 .news-item {
   display: block;
@@ -330,6 +331,8 @@
 /* ضع نصوص الأخبار بلون مناسب */
 .news-list li a, .news-title {
   color: #3e2f00;
+  padding: 5px;
+  font-weight: 900;
 }
 .news-list li{
     border: #333 1px solid;
@@ -366,9 +369,13 @@ body, p, a, span {
     order: 3;  /* يظهر ثالثاً */
   }
 
-  .logo,
-  .banner {
-    height: 150px;
+  .logo
+   {
+    height: auto;
+    width: 100%;
+  }
+  .banner{
+    display: none;
   }
 
   .news-list li {
@@ -421,7 +428,7 @@ body, p, a, span {
     <div class="news-content">
       <a href="{% url 'details' new.id %}" >
         {% if new.category == "رياضى" %}
-          {{ new.id }} - {{ new.title }}
+           {{ new.title }}
         {% else %}
           {{ new.title }}
         {% endif %}
@@ -444,7 +451,7 @@ body, p, a, span {
     {% for news in allnews %}
       <li>
       <a href="{% url 'details' news.id %}" >
-          {{ news.id }} - {{ news.title }}
+           {{ news.title }}
         </a>
         <p>منذ {{ news.created_at|timesince }}</p>
       </li>
@@ -473,7 +480,7 @@ body, p, a, span {
 
 
   <!-- Left Column (مقالات) -->
-<div class="lef-column column">
+<div class="left-column column">
 
 
 
@@ -491,7 +498,7 @@ body, p, a, span {
     <div class="news-content">
       <a href="{% url 'details' art.id %}" >
          {% if art.category == "مقالى" %}
-        {{ art.id }} - {{ art.title }}
+       {{ art.title }}
       {% else %}
         {{ art.title }}
       {% endif %} </a></a>
