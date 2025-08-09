@@ -52,7 +52,7 @@ def crud(request, pk=None):
 
         if form.is_valid():
             news = form.save()
-
+            return redirect('crud') 
             if pk:
                 news.images.all().delete()
 
