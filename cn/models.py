@@ -31,7 +31,7 @@ class News(models.Model):
     category = models.CharField(
         max_length=10,
         choices=C.choices,
-        default=C.ARTICLE,
+        default=C.OTHER,
         verbose_name="التصنيف"
     )
 
